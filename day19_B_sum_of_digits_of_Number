@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <limits.h>
+
+int main(void) {
+    long long n;
+    if (scanf("%lld", &n) != 1) return 1;
+
+    // Handle negative safely (avoid overflow for LLONG_MIN)
+    unsigned long long mag = (n < 0) ? (unsigned long long)(-(n + 1)) + 1ULL : (unsigned long long)n;
+
+    unsigned long long sum = 0ULL;
+    if (mag == 0ULL) {
+        printf("Sum=0\n");
+        return 0;
+    }
+
+    while (mag > 0ULL) {
+        sum += mag % 10ULL;
+        mag /= 10ULL;
+    }
+
+    printf("Sum=%llu\n", sum);
+    return 0;
+}
